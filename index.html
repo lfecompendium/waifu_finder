@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>LFE Waifu generator</title>
+	<link rel="stylesheet" href="css/style.css">
+    <style type="text/css">body{margin:40px
+auto;max-width:650px;line-height:1.6;font-size:18px;color:#eee;padding:0
+10px; text-align: center;background-color:#111;} img{max-width:400px;}h1,h2,h3{line-height:1.2}</style>
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+	<script>
+    function getwaifu() {
+        $.ajax({
+            type: "GET",
+            url: "https://systemspace.link/api/registrants.php",
+            success: function(data){
+                var regs = parseInt(data);
+                var img = new Image();
+                var div = document.getElementById('waifu');
+                var waifu_number = Math.floor(Math.random() * regs);
+                var header = document.getElementById('header');
+                header.innerHTML = "Your waifu is " + waifu_number + "!";
+                div.innerHTML = '';
+                img.onload = function(){div.appendChild(img);};
+                img.src = "https://systemspace.link/usergen/" + waifu_number + ".jpg"
+            }
+        })
+        console.log("It worked?");
+    };
+    </script>
+</head>
+
+<body id="home">
+	<h1 id="header">Find your SystemSpace waifu!</h1>
+    <div id="waifu">
+    
+    </div>
+    <input type='button' name='getwaifu' value='Find waifu' onclick='getwaifu()'>
+</body>
+</html>
